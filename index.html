@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,8 +10,90 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css" />
 </head>
+
 <body>
-    <script src="./src/index.js"></script>
-    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <header class="header__header">
+        <h1>Weather Report</h1>
+        <h2 id="headerCityName" class="header__city-name">Denver</h2>
+    </header>
+    <section class="container">
+        <div class="sky__selection">
+            <h2>Sky</h2>
+            <select is="skySelect">
+                <!-- sky options here -->
+            </select>
+        </div>
+        <div class="temperature__section">
+            <h2>Temperature</h2>
+            <div class="temperature__content">
+
+                <div class="temperature__controls">
+                    <span id="increaseTempControl"><svg enable-background="new 0 0 50 50" height="50px" id="Layer_1"
+                            version="1.1" viewBox="0 0 50 50" width="50px" xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <rect fill="none" height="25" width="25" />
+                            <line fill="none" stroke="#C7F0BD" stroke-miterlimit="10" stroke-width="4" x1="9" x2="41"
+                                y1="25" y2="25" />
+                            <line fill="none" stroke="#C7F0BD" stroke-miterlimit="10" stroke-width="4" x1="25" x2="25"
+                                y1="9" y2="41" />
+                        </svg></span>
+
+                    <span id="decreaseTempControl"><svg enable-background="new 0 0 50 50" height="50px" id="Layer_1"
+                            version="1.1" viewBox="0 0 50 50" width="50px" xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <rect fill="none" height="25" width="25" />
+                            <line fill="none" stroke="#C7F0BD" stroke-miterlimit="10" stroke-width="4" x1="9" x2="41"
+                                y1="25" y2="25" />
+                        </svg></span>
+                </div>
+                <span id="tempValue">50</span>
+                <button id="currentTempButton">Realtime Temp</button>
+            </div>
+        </div>
+        <div class="city-name__section">
+            <h2>City</h2>
+            <input type="text">
+            <button>Reset</button>
+        </div>
+    </section>
+    <section class="garden__section">
+        <h2>Weather Garden</h2>
+        <div id="gardenContent">
+            <div class="sun"></div>
+            <div class="big-cloud">
+                <div class="big-cloud-1"></div>
+                <div class="big-cloud-2"></div>
+                <div class="big-cloud-3"></div>
+            </div>
+            <div class="little-cloud">
+                <div class="little-cloud-1"></div>
+                <div class="little-cloud-2"></div>
+                <div class="little-cloud-3"></div>
+            </div>
+            <div class="winter-tree">
+                <div class="snow-cap"></div>
+                <div class="tree-top"></div>
+                <div class="tree-bottom"></div>
+                <div class="trunk"></div>
+            </div>
+            <div class="spring-tree">
+                <div class="tree-top"></div>
+                <div class="tree-mid-1"></div>
+                <div class="tree-mid-2"></div>
+                <div class="tree-bottom-1"></div>
+                <div class="tree-bottom-2"></div>
+                <div class="trunk"></div>
+                <div class="flower-left"></div>
+                <div class="flower-top"></div>
+                <div class="flower-right"></div>
+            </div>
+            <!--<div class="autumn-tree"></div>
+                <div class="summer-tree"></div> -->
+            <div class="ground"></div>
+        </div>
+    </section>
 </body>
+<script src="./src/index.js"></script>
+<script src="./node_modules/axios/dist/axios.min.js"></script>
+
 </html>

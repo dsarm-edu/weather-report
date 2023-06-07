@@ -1,0 +1,280 @@
+* {
+    border: 1px solid red;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /* display: grid;
+    grid-template-rows: 1fr 1fr 3fr;
+    grid-template-columns: auto; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: lightblue
+}
+
+.header__header {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
+.sky__selection {
+    width: 33%;
+    text-align: center;
+
+}
+
+.temperature__section {
+    width: 33%;
+    text-align: center;
+}
+
+.temperature__content {
+    display: flex;
+    justify-content: space-around;
+
+    >#tempValue {
+        align-self: center;
+    }
+}
+
+.temperature__controls {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.city-name__section {
+    width: auto;
+    flex-grow: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.garden__section {
+    width: 65%;
+    text-align: center;
+}
+
+#gardenContent {
+    border: 5px solid rgb(255, 255, 255);
+    border-bottom: 10px solid gray;
+    box-shadow: 0 0 10px 0 gray;
+    height: 300px;
+    display: grid;
+    grid-template-rows: 2fr 3fr 1fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr;
+
+}
+
+.sun {
+    border-radius: 50%;
+    border: 5px solid rgba(255, 221, 200, .25);
+    background-color: rgb(252, 244, 211);
+    grid-area: 1 / 4 / span 2 / span 1;
+    height: 70px;
+    width: 70px;
+    margin-top: 7px;
+}
+
+.big-cloud {
+    position: absolute;
+    left: 20%;
+    margin-top: 15px;
+
+    >.big-cloud-1 {
+        background-color: white;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        position: relative;
+        top: 10px;
+    }
+
+    >.big-cloud-2 {
+        background-color: white;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        position: relative;
+        bottom: 40px;
+        left: 20px;
+    }
+
+    >.big-cloud-3 {
+        background-color: white;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        position: relative;
+        bottom: 71px;
+        left: 40px
+    }
+}
+
+.little-cloud {
+    position: absolute;
+    left: 40%;
+
+    >.little-cloud-1 {
+        background-color: white;
+        border-radius: 50%;
+        height: 28px;
+        width: 33px;
+        position: relative;
+        top: 25px;
+    }
+
+    >.little-cloud-2 {
+        background-color: white;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        position: relative;
+        bottom: 15px;
+        left: 20px;
+    }
+
+    >.little-cloud-3 {
+        background-color: white;
+        border-radius: 50%;
+        height: 28px;
+        width: 33px;
+        position: relative;
+        bottom: 35px;
+        left: 40px
+    }
+}
+
+.winter-tree {
+    position: absolute;
+    top: 52%;
+    left: 20%;
+    /* visibility: hidden; */
+
+    >.snow-cap {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 40px solid white;
+    }
+
+    > .tree-top {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 40px solid rgb(13, 60, 35);
+        bottom: 30px;
+        z-index: -1;
+    }
+
+    > .tree-bottom {
+        position: relative;
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 40px solid rgb(13, 60, 35);
+        bottom: 55px;
+        z-index: -1;
+    }
+
+    > .trunk {
+        position: relative;
+        background-color: rgb(55, 31, 31);
+        width: 12px;
+        height: 30px;
+        bottom: 55px;
+        left: 18px;
+        z-index: -2;
+    }
+}
+
+.spring-tree {
+    position: absolute;
+    top: 52%;
+    left: 40%;
+
+    > .tree-top {
+        position: relative;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(28, 96, 60);
+    }
+    > .tree-mid-1 {
+        position: relative;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(68, 173, 117);
+        right: 15px;
+        bottom: 10px;
+    }
+    > .tree-mid-2 {
+        position: relative;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(68, 173, 117);
+        bottom: 41px;
+        left: 15px;
+    }
+
+    > .tree-bottom-1 {
+        position: relative;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(28, 96, 60);
+        bottom: 55px;
+        right: 13px;
+    }
+    > .tree-bottom-2 {
+        position: relative;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(28, 96, 60);
+        bottom: 86px;
+        left: 13px;
+    }
+
+    > .trunk {
+        position: relative;
+        background-color: rgb(55, 31, 31);
+        width: 12px;
+        height: 40px;
+        bottom: 100px;
+        left: 9px;
+        z-index: -2;
+    }
+
+    > .flower-left {
+        position: relative;
+        border-radius: 50%;
+        background-color: pink;
+        height: 5px;
+        width: 5px;
+        bottom: 60px;
+    }
+
+}
+
+.ground {
+    background-color: rgb(98, 212, 98);
+    width: 100%;
+    grid-area: 3 / 1 / span 1 / span 8;
+    z-index: -1;
+}
