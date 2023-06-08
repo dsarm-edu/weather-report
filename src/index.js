@@ -1,33 +1,40 @@
-let count = 50
+
+let count = 50;
+
+const loadControls = () => {
+  increaseTempControl = document.getElementById('increaseTempControl');
+  currentTempButton = document.getElementById('currentTempButton');
+  decreaseTempControl = document.getElementById('decreaseTempControl');
+  skySelect = document.getElementById('skySelect')
+  sun = document.getElementsByClassName('sun');
+  winterTree = document.getElementById('winter-tree')
+  springTree = document.getElementsByClassName('spring-tree')
+  autumnTree = document.getElementsByClassName('autumn-tree')
+  summerTree = document.getElementsByClassName('summer-tree')
+  ground = document.getElementsByClassName('ground')
+  garden = document.getElementById('gardenContent')
+  sky = document.getElementsByClassName('sky')
+  bigCloud = document.getElementsByClassName('big-cloud')
+  littleCloud = document.getElementsByClassName('little-cloud')
+}
 
 const increaseTempBtn = () => {
-  const increaseTempControl = document.getElementById('increaseTempControl');
-  const currentTempButton = document.getElementById('currentTempButton');
   count += 1;
   tempValue.textContent = `${count}`;
 };
 
-increaseTempControl.addEventListener('click', increaseTempBtn);
 
 const decreaseTempBtn = () => {
-  const decreaseTempControl = document.getElementById('decreaseTempControl');
-  const currentTempButton = document.getElementById('currentTempButton');
   count -= 1;
   tempValue.textContent = `${count}`;
 };
-
-decreaseTempControl.addEventListener('click', decreaseTempBtn);
-
 const changeColorBasedOnTemp = () => {
-  const tempValue = document.getElementById('tempValue');
   const temperature = tempValue.textContent;
 
   tempValue.classList.remove('red', 'orange', 'yellow', 'green', 'teal');
 
   if (temperature >= 80) {
     tempValue.classList.add('red');
-  } else if (temperature >= 70 && temperature <= 79) {
-    tempValue.classList.add('orange');
   } else if (temperature >= 70 && temperature <= 79) {
     tempValue.classList.add('orange');
   } else if (temperature >= 60 && temperature <= 69) {
@@ -40,5 +47,54 @@ const changeColorBasedOnTemp = () => {
 };
 
 
-increaseTempControl.addEventListener('click', changeColorBasedOnTemp);
-decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+const changeSkyscape = () => {
+  if (skySelect.value === 'snowy') {
+    sun[0].classList.add('snowy');
+    winterTree.style.visibility = 'visible';
+    ground[0].classList.add('snowy');
+    sky[0].textContent = '❄️ ❄️ ❄️ '
+  }
+  if (skySelect.value === 'rainy') {
+    sun[0].classList.add('rainy');
+    springTree[0].style.visibility = 'visible';
+    ground[0].classList.add('rainy');
+    sky[0].textContent = ''
+    sky[0].textContent = '💧💧💧'
+
+  }
+  if (skySelect.value === 'cloudy') {
+    sun[0].classList.add('cloudy');
+    autumnTree[0].style.visibility = 'visible';
+    ground[0].classList.add('cloudy');
+    sky[0].textContent = '';
+    sky[0].textContent = '🍁🍁🍁';
+    bigCloud[0].style.visibility = 'visible';
+    littleCloud[0].style.visibility = 'visible';
+    garden.style.background = 'rgba(128,128,128, .1)'
+    sun[0].textContent = o_0
+  }
+  if (skySelect.value === 'sunny') {
+    sun[0].classList.add('sunny');
+    summerTree[0].style.visibility = 'visible';
+    ground[0].classList.add('sunny');
+    sky[0].textContent = '';
+    sky[0].textContent = '☀️☀️☀️';
+    sun[0].textContent = '-_-'
+  }
+
+}
+const registerEvents = () => {
+  increaseTempControl.addEventListener('click', increaseTempBtn);
+  decreaseTempControl.addEventListener('click', decreaseTempBtn);
+  increaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+  decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+
+  skySelect.addEventListener('change', changeSkyscape);
+}
+
+onLoad = () => {
+  loadControls();
+  registerEvents();
+};
+
+onLoad();
