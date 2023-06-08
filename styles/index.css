@@ -515,7 +515,6 @@ input {
     z-index: -1;
 }
 
-<<<<<<< HEAD
 .red {
 color: red;
 }
@@ -540,7 +539,7 @@ color: green;
 color: teal;
 }
 
-.cloudy {
+/* .cloudy {
 background-color: lightgrey;
 }
 
@@ -554,87 +553,8 @@ background-color: lightblue;
 
 .snowy {
 background-color: lightsteelblue;
-}
+} */
 
-.red {
-color: red;
-}
-
-.orange {
-color: orange;
-}
-
-.yellow {
-color: gold;
-}
-
-.yellow-green {
-color: yellowgreen;
-}
-
-.green {
-color: green;
-}
-
-.teal {
-color: teal;
-}
-
-.cloudy {
-background-color: lightgrey;
-}
-
-.sunny {
-background-color: rgb(221, 255, 255);
-}
-
-.rainy {
-background-color: lightblue;
-}
-
-.snowy {
-background-color: lightsteelblue;
-}
-
-.red {
-color: red;
-}
-
-.orange {
-color: orange;
-}
-
-.yellow {
-color: gold;
-}
-
-.yellow-green {
-color: yellowgreen;
-}
-
-.green {
-color: green;
-}
-
-.teal {
-color: teal;
-}
-
-.cloudy {
-background-color: lightgrey;
-}
-
-.sunny {
-background-color: rgb(221, 255, 255);
-}
-
-.rainy {
-background-color: lightblue;
-}
-
-.snowy {
-background-color: lightsteelblue;
-=======
 /*====SKY CONDITIONS==*/
 .snowy-sky {
     background-color: rgba(255, 255, 255, .25);

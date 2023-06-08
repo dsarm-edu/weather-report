@@ -40,44 +40,49 @@ const changeColorBasedOnTemp = () => {
   } else if (temperature <= 49) {
     tempValue.classList.add('teal');
   }
+
+  tree[0].classList.toggle('show', temperature <= 49)
+  garden.classList.toggle('snowy-sky', temperature <= 49)
+  ground[0].classList.toggle('snowy', temperature <= 49);
+
+  tree[2].classList.toggle('show', temperature >= 50 && temperature <= 64);
+  ground[0].classList.toggle('cloudy', temperature >= 50 && temperature <= 64);
+  garden.classList.toggle('cloudy-sky', temperature >= 50 && temperature <= 64);
+
+  tree[1].classList.toggle('show', temperature >= 65 && temperature <= 75)
+
+  tree[3].classList.toggle('show', temperature > 75);
+  ground[0].classList.toggle('sunny', temperature > 75);
 };
 
 
-const changeSkyscape = () => { 
+const changeSkyscape = () => {
+  sky[0].textContent = '';
   // CLOUDY
-    tree[2].classList.toggle('show', skySelect.value === 'cloudy');
-    ground[0].classList.toggle('cloudy', skySelect.value === 'cloudy');
-    garden.classList.toggle('cloudy-sky', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
-    // sky[0].textContent = '';
-    // sky[0].textContent = '🍁🍁🍁';
-
+  if (skySelect.value === 'cloudy') {
+    sky[0].textContent = '🌾🍃🌾';
+  }
   // SUNNY
-    tree[3].classList.toggle('show', skySelect.value === 'sunny');
-    ground[0].classList.toggle('sunny', skySelect.value === 'sunny');
-    
-    // SNOWY
-    tree[0].classList.toggle('show', skySelect.value === 'snowy')
-    garden.classList.toggle('snowy-sky', skySelect.value === 'snowy')
-    ground[0].classList.toggle('snowy', skySelect.value === 'snowy');
+  if (skySelect.value === 'sunny') {
+    sky[0].textContent = '☀️😎☀️';
+  }
 
+  // SNOWY
+  if (skySelect.value === 'snowy') {
+    sky[0].textContent = '❄️🥶❄️'
+  }
 
   // RAINY
-    tree[1].classList.toggle('show', skySelect.value === 'rainy')
+  if (skySelect.value === 'rainy') {
+    sky[0].textContent = '💧☔️💧'
+  }
 
 
-    cloud[0].classList.toggle('show', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
-    cloud[1].classList.toggle('show', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
-
-  //   sky[0].textContent = ''
-  //   sky[0].textContent = '💧💧💧'
-
-
-  //   sky[0].textContent = '';
-  //   sky[0].textContent = '☀️☀️☀️';
-  //   sun[0].textContent = '-_-'
-  // }
+  cloud[0].classList.toggle('show', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
+  cloud[1].classList.toggle('show', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
 
 }
+
 const registerEvents = () => {
   increaseTempControl.addEventListener('click', increaseTempBtn);
   decreaseTempControl.addEventListener('click', decreaseTempBtn);
