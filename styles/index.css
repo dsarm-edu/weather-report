@@ -50,6 +50,10 @@ body {
     }
 }
 
+#tempValue {
+    font-size: 3rem;
+}
+
 .temperature__controls {
     display: flex;
     flex-direction: column;
@@ -62,6 +66,19 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
+    align-content: center;
+}
+
+input {
+    width: 80%;
+    align-self: center;
+}
+
+.city-name__section button {
+    border-radius: 20%;
+    align-self: center;
+    
+
 }
 
 .garden__section {

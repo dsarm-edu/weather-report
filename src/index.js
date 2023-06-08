@@ -30,16 +30,15 @@ const decreaseTempBtn = () => {
 };
 const changeColorBasedOnTemp = () => {
   const temperature = tempValue.textContent;
-
-  if (temperature >= 90) {
+  if (count >= 90) {
     tempValue.style.color = 'red';
-  } else if (temperature >= 70 && temperature >= 79) {
+  } else if (count >= 70 && count >= 79) {
     tempValue.style.color = 'orange';
-  } else if (temperature >= 60 && temperature >= 69) {
+  } else if (count >= 60 && count >= 69) {
     tempValue.style.color = 'yellow';
-  } else if (temperature >= 50 && temperature >= 59) {
+  } else if (count >= 50 && count >= 59) {
     tempValue.style.color = 'green'
-  } else if (temperature <= 49) {
+  } else if (count <= 49) {
     tempValue.style.color = 'teal';
   }
 }
@@ -84,6 +83,9 @@ const changeSkyscape = () => {
 const registerEvents = () => {
   increaseTempControl.addEventListener('click', increaseTempBtn);
   decreaseTempControl.addEventListener('click', decreaseTempBtn);
+  increaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+  decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+
   skySelect.addEventListener('change', changeSkyscape);
 }
 
