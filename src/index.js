@@ -90,7 +90,39 @@ const registerEvents = () => {
   decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
 
   skySelect.addEventListener('change', changeSkyscape);
+  currentTempButton.addEventListener('click', getRealtimeWeather)
+  // currentTempButton.addEventListener('click', getLatLon)
 }
+
+
+
+
+const changeCityName = () => {
+
+  const input = document.getElementById('inputCityName');
+  const headerCityName = document.getElementById('headerCityName');
+  input.addEventListener("input", () => {
+    headerCityName.textContent = input.value;
+  });
+
+}
+
+changeCityName();
+
+const getLatLon = async () => {
+  const response = await axios.get('http://127.0.0.1:5000/location', { params: { q: headerCityName.textContent } })
+  const { lat: latitude, lon: longitude } = response.data[0];
+  console.log(latitude, longitude)
+  return  latitude, longitude 
+}
+
+const getRealtimeWeather = async () => {
+  let lat = getLatLon()[0];
+  let lon = getLatLon()[1]
+  const response = await axios.get('http://127.0.0.1:5000/weather', { params: {lat: lat, lon: lon}})
+  console.log(response)
+}
+
 
 onLoad = () => {
   loadControls();
