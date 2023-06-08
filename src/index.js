@@ -28,8 +28,6 @@ const changeColorBasedOnTemp = () => {
     tempValue.classList.add('red');
   } else if (temperature >= 70 && temperature <= 79) {
     tempValue.classList.add('orange');
-  } else if (temperature >= 70 && temperature <= 79) {
-    tempValue.classList.add('orange');
   } else if (temperature >= 60 && temperature <= 69) {
     tempValue.classList.add('yellow');
   } else if (temperature >= 50 && temperature <= 59) {
@@ -42,3 +40,17 @@ const changeColorBasedOnTemp = () => {
 
 increaseTempControl.addEventListener('click', changeColorBasedOnTemp);
 decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+
+
+const changeCityName = () => {
+  
+  const input = document.getElementById('inputCityName');
+  const headerCityName = document.getElementById('headerCityName');
+  input.addEventListener("input", () => {
+    headerCityName.textContent = input.value;
+  });
+  
+}
+
+changeCityName();
+
