@@ -1,5 +1,10 @@
 
-let count = 50;
+
+const state = {
+  count: 50,
+  city: 'Los Angeles',
+
+}
 
 const loadControls = () => {
   increaseTempControl = document.getElementById('increaseTempControl');
@@ -15,13 +20,13 @@ const loadControls = () => {
 }
 
 const increaseTempBtn = () => {
-  count += 1;
-  tempValue.textContent = `${count}`;
+  state.count += 1;
+  tempValue.textContent = `${state.count}`;
 };
 
 const decreaseTempBtn = () => {
-  count -= 1;
-  tempValue.textContent = `${count}`;
+  state.count -= 1;
+  tempValue.textContent = `${state.count}`;
 };
 
 const changeColorBasedOnTemp = () => {
@@ -95,6 +100,9 @@ const registerEvents = () => {
 onLoad = () => {
   loadControls();
   registerEvents();
+  changeCityName();
+  resetCity();
+  
 };
 
 onLoad();
@@ -107,8 +115,17 @@ const changeCityName = () => {
   input.addEventListener("input", () => {
     headerCityName.textContent = input.value;
   });
-  
 }
 
-changeCityName();
+const resetCity = () => {
+  const input = document.getElementById('inputCityName');
+  const headerCityName = document.getElementById('headerCityName');
+  const resetButton = document.getElementById('resetButton')
+
+  resetButton.addEventListener('click', () => {
+    input.value = '';
+    headerCityName.textContent = '';
+  });
+}
+
 
