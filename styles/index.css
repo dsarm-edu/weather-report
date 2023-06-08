@@ -452,3 +452,123 @@ body {
     grid-area: 3 / 1 / span 1 / span 8;
     z-index: -1;
 }
+
+.red {
+color: red;
+}
+
+.orange {
+color: orange;
+}
+
+.yellow {
+color: gold;
+}
+
+.yellow-green {
+color: yellowgreen;
+}
+
+.green {
+color: green;
+}
+
+.teal {
+color: teal;
+}
+
+.cloudy {
+background-color: lightgrey;
+}
+
+.sunny {
+background-color: rgb(221, 255, 255);
+}
+
+.rainy {
+background-color: lightblue;
+}
+
+.snowy {
+background-color: lightsteelblue;
+}
+
+.red {
+color: red;
+}
+
+.orange {
+color: orange;
+}
+
+.yellow {
+color: gold;
+}
+
+.yellow-green {
+color: yellowgreen;
+}
+
+.green {
+color: green;
+}
+
+.teal {
+color: teal;
+}
+
+.cloudy {
+background-color: lightgrey;
+}
+
+.sunny {
+background-color: rgb(221, 255, 255);
+}
+
+.rainy {
+background-color: lightblue;
+}
+
+.snowy {
+background-color: lightsteelblue;
+}
+
+.red {
+color: red;
+}
+
+.orange {
+color: orange;
+}
+
+.yellow {
+color: gold;
+}
+
+.yellow-green {
+color: yellowgreen;
+}
+
+.green {
+color: green;
+}
+
+.teal {
+color: teal;
+}
+
+.cloudy {
+background-color: lightgrey;
+}
+
+.sunny {
+background-color: rgb(221, 255, 255);
+}
+
+.rainy {
+background-color: lightblue;
+}
+
+.snowy {
+background-color: lightsteelblue;
+}
