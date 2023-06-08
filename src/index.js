@@ -86,8 +86,8 @@ const changeSkyscape = () => {
 const registerEvents = () => {
   increaseTempControl.addEventListener('click', increaseTempBtn);
   decreaseTempControl.addEventListener('click', decreaseTempBtn);
-  increaseTempControl.addEventListener('click', changeColorBasedOnTemp);
-  decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+  increaseTempControl.addEventListener('click', changeColorBasedOnTemp);  decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+
 
   skySelect.addEventListener('change', changeSkyscape);
 }
@@ -98,3 +98,17 @@ onLoad = () => {
 };
 
 onLoad();
+
+
+const changeCityName = () => {
+  
+  const input = document.getElementById('inputCityName');
+  const headerCityName = document.getElementById('headerCityName');
+  input.addEventListener("input", () => {
+    headerCityName.textContent = input.value;
+  });
+  
+}
+
+changeCityName();
+
