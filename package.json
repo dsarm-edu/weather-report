@@ -14,4 +14,5 @@
     "dev": "parcel index.html ",
     "build": "parcel build index.html --public-url /weather-report/"
   }
+
 }
