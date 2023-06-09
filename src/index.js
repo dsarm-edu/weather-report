@@ -122,7 +122,7 @@ const registerEvents = () => {
   skySelect.addEventListener('change', changeSkyscape);
 }
 
-onLoad = () => {
+const onLoad = () => {
   loadControls();
   registerEvents();
   changeCityName();
