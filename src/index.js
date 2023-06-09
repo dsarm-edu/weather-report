@@ -1,5 +1,3 @@
-let temperature = 50;
-
 const loadControls = () => {
   increaseTempControl = document.getElementById('increaseTempControl');
   currentTempButton = document.getElementById('currentTempButton');
@@ -11,6 +9,12 @@ const loadControls = () => {
   garden = document.getElementById('gardenContent')
   sky = document.getElementsByClassName('sky')
   cloud = document.getElementsByClassName('cloud')
+  input = document.getElementById('inputCityName');
+  headerCityName = document.getElementById('headerCityName');
+  input = document.getElementById('inputCityName');
+  headerCityName = document.getElementById('headerCityName');
+  resetButton = document.getElementById('resetButton')
+  temperature = 50
 }
 
 const increaseTempBtn = () => {
@@ -79,20 +83,12 @@ const changeSkyscape = () => {
 }
 
 const changeCityName = () => {
-  
-  const input = document.getElementById('inputCityName');
-  const headerCityName = document.getElementById('headerCityName');
   input.addEventListener("input", () => {
     headerCityName.textContent = input.value;
   });
-  
 }
 
 const resetCity = () => {
-  const input = document.getElementById('inputCityName');
-  const headerCityName = document.getElementById('headerCityName');
-  const resetButton = document.getElementById('resetButton')
-  
   resetButton.addEventListener('click', () => {
     input.value = '';
     headerCityName.textContent = 'Las Vegas';
@@ -118,8 +114,8 @@ const registerEvents = () => {
   increaseTempControl.addEventListener('click', increaseTempBtn);
   decreaseTempControl.addEventListener('click', decreaseTempBtn);
   increaseTempControl.addEventListener('click', changeColorBasedOnTemp);  decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
-  skySelect.addEventListener('change', changeSkyscape);
   currentTempButton.addEventListener('click', getRealtimeWeather)
+  skySelect.addEventListener('change', changeSkyscape);
 }
 
 onLoad = () => {
