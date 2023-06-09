@@ -259,7 +259,6 @@ input {
     z-index: -2;
 }
 
-
 .spring-tree {
     grid-area: 3 / 2 / span 1 / span 1;
     align-self: end;
@@ -360,8 +359,6 @@ input {
     height: 5px;
     width: 5px;
 }
-
-
 
 .autumn-tree {
     grid-area: 3 / 3 / span 1 / span 1;
@@ -507,7 +504,6 @@ input {
     align-self: start;
 }
 
-
 .ground {
     background-color: rgb(98, 212, 98);
     width: 100%;
@@ -538,22 +534,6 @@ color: green;
 .teal {
 color: teal;
 }
-
-/* .cloudy {
-background-color: lightgrey;
-}
-
-.sunny {
-background-color: rgb(221, 255, 255);
-}
-
-.rainy {
-background-color: lightblue;
-}
-
-.snowy {
-background-color: lightsteelblue;
-} */
 
 /*====SKY CONDITIONS==*/
 .snowy-sky {

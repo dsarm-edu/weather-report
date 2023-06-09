@@ -1,10 +1,4 @@
-
-
-const state = {
-  count: 50,
-  city: 'Los Angeles',
-
-}
+let temperature = 50;
 
 const loadControls = () => {
   increaseTempControl = document.getElementById('increaseTempControl');
@@ -20,46 +14,43 @@ const loadControls = () => {
 }
 
 const increaseTempBtn = () => {
-  state.count += 1;
-  tempValue.textContent = `${state.count}`;
+  temperature += 1;
+  tempValue.textContent = temperature;
 };
 
 const decreaseTempBtn = () => {
-  state.count -= 1;
-  tempValue.textContent = `${state.count}`;
+  temperature -= 1;
+  tempValue.textContent = temperature;
 };
 
 const changeColorBasedOnTemp = () => {
-  const temperature = tempValue.textContent;
-
   tempValue.classList.remove('red', 'orange', 'yellow', 'green', 'teal');
 
-  if (count >= 80) {
+  if (temperature >= 80) {
     tempValue.classList.add('red');
-  } else if (count >= 70 && count <= 79) {
+  } else if (temperature >= 70 && temperature <= 79) {
     tempValue.classList.add('orange');
-  } else if (count >= 60 && count <= 69) {
+  } else if (temperature >= 60 && temperature <= 69) {
     tempValue.classList.add('yellow');
-  } else if (count >= 50 && count <= 59) {
+  } else if (temperature >= 50 && temperature <= 59) {
     tempValue.classList.add('green');
-  } else if (count <= 49) {
+  } else if (temperature <= 49) {
     tempValue.classList.add('teal');
   }
 
-  tree[0].classList.toggle('show', count <= 49)
-  garden.classList.toggle('snowy-sky', count <= 49)
-  ground[0].classList.toggle('snowy', count <= 49);
+  tree[0].classList.toggle('show', temperature <= 49)
+  garden.classList.toggle('snowy-sky', temperature <= 49)
+  ground[0].classList.toggle('snowy', temperature <= 49);
 
-  tree[2].classList.toggle('show', count >= 50 && count <= 64);
-  ground[0].classList.toggle('cloudy', count >= 50 && count <= 64);
-  garden.classList.toggle('cloudy-sky', count >= 50 && count <= 64);
+  tree[2].classList.toggle('show', temperature >= 50 && temperature <= 64);
+  ground[0].classList.toggle('cloudy', temperature >= 50 && temperature <= 64);
+  garden.classList.toggle('cloudy-sky', temperature >= 50 && temperature <= 64);
 
-  tree[1].classList.toggle('show', count >= 65 && count <= 75)
+  tree[1].classList.toggle('show', temperature >= 65 && temperature <= 75)
 
-  tree[3].classList.toggle('show', count > 75);
-  ground[0].classList.toggle('sunny', count > 75);
+  tree[3].classList.toggle('show', temperature > 75);
+  ground[0].classList.toggle('sunny', temperature > 75);
 };
-
 
 const changeSkyscape = () => {
   sky[0].textContent = '';
@@ -82,38 +73,31 @@ const changeSkyscape = () => {
     sky[0].textContent = '💧☔️💧'
   }
 
-
+  //CLOUDY or RAINY
   cloud[0].classList.toggle('show', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
   cloud[1].classList.toggle('show', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
-
 }
-
-const registerEvents = () => {
-  increaseTempControl.addEventListener('click', increaseTempBtn);
-  decreaseTempControl.addEventListener('click', decreaseTempBtn);
-  increaseTempControl.addEventListener('click', changeColorBasedOnTemp);  decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
-
-
-  skySelect.addEventListener('change', changeSkyscape);
-  currentTempButton.addEventListener('click', getRealtimeWeather)
-  // currentTempButton.addEventListener('click', getLatLon)
-}
-
-
-
 
 const changeCityName = () => {
-
+  
   const input = document.getElementById('inputCityName');
   const headerCityName = document.getElementById('headerCityName');
   input.addEventListener("input", () => {
     headerCityName.textContent = input.value;
   });
-
+  
 }
 
-changeCityName();
-
+const resetCity = () => {
+  const input = document.getElementById('inputCityName');
+  const headerCityName = document.getElementById('headerCityName');
+  const resetButton = document.getElementById('resetButton')
+  
+  resetButton.addEventListener('click', () => {
+    input.value = '';
+    headerCityName.textContent = 'Las Vegas';
+  });
+}
 
 const getLatLon = async () => {
   const response = await axios.get('http://127.0.0.1:5000/location', { params: { q: headerCityName.textContent } })
@@ -126,9 +110,16 @@ const getRealtimeWeather = async () => {
   const {latitude , longitude} = await getLatLon()
   const response = await axios.get('http://127.0.0.1:5000/weather', { params: {lat: latitude, lon: longitude}})
   const currTemp = response.data.main.temp
-  count = Math.floor((currTemp - 273.15) * 9/5 + 32);
-  tempValue.textContent = count;
+  temperature = Math.floor((currTemp - 273.15) * 9/5 + 32);
+  tempValue.textContent = temperature;
   changeColorBasedOnTemp()
+}
+const registerEvents = () => {
+  increaseTempControl.addEventListener('click', increaseTempBtn);
+  decreaseTempControl.addEventListener('click', decreaseTempBtn);
+  increaseTempControl.addEventListener('click', changeColorBasedOnTemp);  decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+  skySelect.addEventListener('change', changeSkyscape);
+  currentTempButton.addEventListener('click', getRealtimeWeather)
 }
 
 onLoad = () => {
@@ -140,26 +131,4 @@ onLoad = () => {
 };
 
 onLoad();
-
-
-const changeCityName = () => {
-  
-  const input = document.getElementById('inputCityName');
-  const headerCityName = document.getElementById('headerCityName');
-  input.addEventListener("input", () => {
-    headerCityName.textContent = input.value;
-  });
-}
-
-const resetCity = () => {
-  const input = document.getElementById('inputCityName');
-  const headerCityName = document.getElementById('headerCityName');
-  const resetButton = document.getElementById('resetButton')
-
-  resetButton.addEventListener('click', () => {
-    input.value = '';
-    headerCityName.textContent = '';
-  });
-}
-
 
