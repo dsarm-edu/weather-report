@@ -1,133 +1,147 @@
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
 
+const state = {
+  increaseTempControl: null,
+  currentTempButton: null,
+  decreaseTempControl: null,
+  skySelect: null,
+  sun: null,
+  tree: null,
+  ground: null,
+  garden: null,
+  sky: null,
+  cloud: null,
+  headerCityName: null,
+  input: null,
+  headerCityName: null,
+  resetButton: null,
+  tempValue: null,
+  temperature: 50
+}
 
 const loadControls = () => {
-  increaseTempControl = document.getElementById('increaseTempControl');
-  currentTempButton = document.getElementById('currentTempButton');
-  decreaseTempControl = document.getElementById('decreaseTempControl');
-  skySelect = document.getElementById('skySelect')
-  sun = document.getElementsByClassName('sun');
-  tree = document.getElementsByClassName('tree')
-  ground = document.getElementsByClassName('ground')
-  garden = document.getElementById('gardenContent')
-  sky = document.getElementsByClassName('sky')
-  cloud = document.getElementsByClassName('cloud')
-  input = document.getElementById('inputCityName');
-  headerCityName = document.getElementById('headerCityName');
-  input = document.getElementById('inputCityName');
-  headerCityName = document.getElementById('headerCityName');
-  resetButton = document.getElementById('resetButton')
-  temperature = 50
+  state.increaseTempControl = document.getElementById('increaseTempControl');
+  state.currentTempButton = document.getElementById('currentTempButton');
+  state.decreaseTempControl = document.getElementById('decreaseTempControl');
+  state.skySelect = document.getElementById('skySelect');
+  state.sun = document.getElementsByClassName('sun');
+  state.tree = document.getElementsByClassName('tree');
+  state.ground = document.getElementsByClassName('ground');
+  state.garden = document.getElementById('gardenContent');
+  state.sky = document.getElementsByClassName('sky');
+  state.cloud = document.getElementsByClassName('cloud');
+  state.headerCityName = document.getElementById('headerCityName');
+  state.input = document.getElementById('inputCityName');
+  state.headerCityName = document.getElementById('headerCityName');
+  state.resetButton = document.getElementById('resetButton');
+  state.tempValue = document.getElementById('tempValue');
+  state.temperature = 50
 }
 
 const increaseTempBtn = () => {
-  temperature += 1;
-  tempValue.textContent = temperature;
+  state.temperature += 1;
+  state.tempValue.textContent = state.temperature;
 };
 
 const decreaseTempBtn = () => {
-  temperature -= 1;
-  tempValue.textContent = temperature;
+  state.temperature -= 1;
+  state.tempValue.textContent = state.temperature;
 };
 
 const changeColorBasedOnTemp = () => {
-  tempValue.classList.remove('red', 'orange', 'yellow', 'green', 'teal');
+  state.tempValue.classList.remove('red', 'orange', 'yellow', 'green', 'teal');
 
-  if (temperature >= 80) {
-    tempValue.classList.add('red');
-  } else if (temperature >= 70 && temperature <= 79) {
-    tempValue.classList.add('orange');
-  } else if (temperature >= 60 && temperature <= 69) {
-    tempValue.classList.add('yellow');
-  } else if (temperature >= 50 && temperature <= 59) {
-    tempValue.classList.add('green');
-  } else if (temperature <= 49) {
-    tempValue.classList.add('teal');
+  if (state.temperature >= 80) {
+    state.tempValue.classList.add('red');
+  } else if (state.temperature >= 70 && state.temperature <= 79) {
+    state.tempValue.classList.add('orange');
+  } else if (state.temperature >= 60 && state.temperature <= 69) {
+    state.tempValue.classList.add('yellow');
+  } else if (state.temperature >= 50 && state.temperature <= 59) {
+    state.tempValue.classList.add('green');
+  } else if (state.temperature <= 49) {
+    state.tempValue.classList.add('teal');
   }
+  //TOGGLE LANDSCAPE
+  state.tree[0].classList.toggle('show', state.temperature <= 49)
+  state.garden.classList.toggle('snowy-sky', state.temperature <= 49)
+  state.ground[0].classList.toggle('snowy', state.temperature <= 49);
 
-  tree[0].classList.toggle('show', temperature <= 49)
-  garden.classList.toggle('snowy-sky', temperature <= 49)
-  ground[0].classList.toggle('snowy', temperature <= 49);
+  state.tree[2].classList.toggle('show', state.temperature >= 50 && state.temperature <= 64);
+  state.ground[0].classList.toggle('cloudy', state.temperature >= 50 && state.temperature <= 64);
+  state.garden.classList.toggle('cloudy-sky', state.temperature >= 50 && state.temperature <= 64);
 
-  tree[2].classList.toggle('show', temperature >= 50 && temperature <= 64);
-  ground[0].classList.toggle('cloudy', temperature >= 50 && temperature <= 64);
-  garden.classList.toggle('cloudy-sky', temperature >= 50 && temperature <= 64);
+  state.tree[1].classList.toggle('show', state.temperature >= 65 && state.temperature <= 75)
 
-  tree[1].classList.toggle('show', temperature >= 65 && temperature <= 75)
-
-  tree[3].classList.toggle('show', temperature > 75);
-  ground[0].classList.toggle('sunny', temperature > 75);
+  state.tree[3].classList.toggle('show', state.temperature > 75);
+  state.ground[0].classList.toggle('sunny', state.temperature > 75);
 };
 
 const changeSkyscape = () => {
-  sky[0].textContent = '';
+  state.sky[0].textContent = '';
   // CLOUDY
-  if (skySelect.value === 'cloudy') {
-    sky[0].textContent = '🌾🍃🌾';
+  if (state.skySelect.value === 'cloudy') {
+    state.sky[0].textContent = '🌾🍃🌾';
   }
   // SUNNY
-  if (skySelect.value === 'sunny') {
-    sky[0].textContent = '☀️😎☀️';
+  if (state.skySelect.value === 'sunny') {
+    state.sky[0].textContent = '☀️😎☀️';
   }
 
   // SNOWY
-  if (skySelect.value === 'snowy') {
-    sky[0].textContent = '❄️🥶❄️'
+  if (state.skySelect.value === 'snowy') {
+    state.sky[0].textContent = '❄️🥶❄️'
   }
 
   // RAINY
-  if (skySelect.value === 'rainy') {
-    sky[0].textContent = '💧☔️💧'
+  if (state.skySelect.value === 'rainy') {
+    state.sky[0].textContent = '💧☔️💧'
   }
 
   //CLOUDY or RAINY
-  cloud[0].classList.toggle('show', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
-  cloud[1].classList.toggle('show', skySelect.value === 'cloudy' || skySelect.value === 'rainy');
+  state.cloud[0].classList.toggle('show', state.skySelect.value === 'cloudy' || state.skySelect.value === 'rainy');
+  state.cloud[1].classList.toggle('show', state.skySelect.value === 'cloudy' || state.skySelect.value === 'rainy');
 }
 
 const changeCityName = () => {
-  input.addEventListener("input", () => {
-    headerCityName.textContent = input.value;
-  });
-}
+    state.headerCityName.textContent = state.input.value;
+  };
 
 const resetCity = () => {
-  resetButton.addEventListener('click', () => {
-    input.value = '';
-    headerCityName.textContent = 'Las Vegas';
-  });
-}
+    state.input.value = '';
+    state.headerCityName.textContent = 'Las Vegas';
+  };
+
 
 const getLatLon = async () => {
   const response = await axios.get('http://127.0.0.1:5000/location', { params: { q: headerCityName.textContent } })
   const { lat: latitude, lon: longitude } = response.data[0];
   console.log(latitude, longitude)
-  return  { latitude, longitude }
+  return { latitude, longitude }
 }
 
 const getRealtimeWeather = async () => {
-  const {latitude , longitude} = await getLatLon()
-  const response = await axios.get('http://127.0.0.1:5000/weather', { params: {lat: latitude, lon: longitude}})
+  const { latitude, longitude } = await getLatLon()
+  const response = await axios.get('http://127.0.0.1:5000/weather', { params: { lat: latitude, lon: longitude } })
   const currTemp = response.data.main.temp
-  temperature = Math.floor((currTemp - 273.15) * 9/5 + 32);
-  tempValue.textContent = temperature;
+  state.temperature = Math.floor((currTemp - 273.15) * 9 / 5 + 32);
+  state.tempValue.textContent = state.temperature;
   changeColorBasedOnTemp()
 }
 const registerEvents = () => {
-  increaseTempControl.addEventListener('click', increaseTempBtn);
-  decreaseTempControl.addEventListener('click', decreaseTempBtn);
-  increaseTempControl.addEventListener('click', changeColorBasedOnTemp);  decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
-  currentTempButton.addEventListener('click', getRealtimeWeather)
-  skySelect.addEventListener('change', changeSkyscape);
+  state.increaseTempControl.addEventListener('click', increaseTempBtn);
+  state.decreaseTempControl.addEventListener('click', decreaseTempBtn);
+  state.increaseTempControl.addEventListener('click', changeColorBasedOnTemp); state.decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+  state.currentTempButton.addEventListener('click', getRealtimeWeather)
+  state.skySelect.addEventListener('change', changeSkyscape);
+  state.input.addEventListener('input', changeCityName);
+  state.resetButton.addEventListener('click', resetCity)
 }
 
 const onLoad = () => {
   loadControls();
   registerEvents();
-  changeCityName();
-  resetCity();
-  
 };
 
 onLoad();

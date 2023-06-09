@@ -23,6 +23,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 90%;
+    min-height: 25;
     background: linear-gradient(rgb(47, 47, 137), lightblue);
     color: white;
     border: 4px outset rgb(253, 252, 250);
