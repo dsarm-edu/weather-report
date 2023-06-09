@@ -1,3 +1,7 @@
+import 'regenerator-runtime/runtime';
+import axios from 'axios';
+
+
 const loadControls = () => {
   increaseTempControl = document.getElementById('increaseTempControl');
   currentTempButton = document.getElementById('currentTempButton');
