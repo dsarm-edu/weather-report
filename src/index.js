@@ -1,5 +1,5 @@
-import 'regenerator-runtime/runtime';
-import axios from 'axios';
+// import 'regenerator-runtime/runtime';
+// import axios from 'axios';
 
 const state = {
   increaseTempControl: null,
@@ -17,6 +17,7 @@ const state = {
   headerCityName: null,
   resetButton: null,
   tempValue: null,
+  tempUnitToggle: null,
   temperature: 50
 }
 
@@ -36,6 +37,7 @@ const loadControls = () => {
   state.headerCityName = document.getElementById('headerCityName');
   state.resetButton = document.getElementById('resetButton');
   state.tempValue = document.getElementById('tempValue');
+  state.tempUnitToggle = document.getElementById('unitToggle')
   state.temperature = 50
 }
 
@@ -49,6 +51,19 @@ const decreaseTempBtn = () => {
   state.tempValue.textContent = state.temperature;
 };
 
+// const toggleTempUnits = () => {
+//   if (state.tempUnitToggle.checked) {
+//     const celciusTemp = Math.floor((state.temperature - 32) * 5/9)
+//     console.log(state.temperature)
+//     tempValue.textContent = celciusTemp
+//   } else {
+//     tempValue.textContent = state.temperature
+//   }
+// }
+
+const displayTemp = () => {
+  
+}
 const changeColorBasedOnTemp = () => {
   state.tempValue.classList.remove('red', 'orange', 'yellow', 'green', 'teal');
 
@@ -137,6 +152,7 @@ const registerEvents = () => {
   state.skySelect.addEventListener('change', changeSkyscape);
   state.input.addEventListener('input', changeCityName);
   state.resetButton.addEventListener('click', resetCity)
+  // state.tempUnitToggle.addEventListener('change', toggleTempUnits)
 }
 
 const onLoad = () => {
