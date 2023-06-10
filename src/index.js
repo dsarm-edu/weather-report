@@ -115,7 +115,7 @@ const resetCity = () => {
 
 
 const getLatLon = async () => {
-  const response = await axios.get('http://127.0.0.1:5000/location', { params: { q: headerCityName.textContent } })
+  const response = await axios.get('https://weather-report-proxy-msis.onrender.com/location', { params: { q: headerCityName.textContent } })
   const { lat: latitude, lon: longitude } = response.data[0];
   console.log(latitude, longitude)
   return { latitude, longitude }
@@ -123,7 +123,7 @@ const getLatLon = async () => {
 
 const getRealtimeWeather = async () => {
   const { latitude, longitude } = await getLatLon()
-  const response = await axios.get('http://127.0.0.1:5000/weather', { params: { lat: latitude, lon: longitude } })
+  const response = await axios.get('https://weather-report-proxy-msis.onrender.com/weather', { params: { lat: latitude, lon: longitude } })
   const currTemp = response.data.main.temp
   state.temperature = Math.floor((currTemp - 273.15) * 9 / 5 + 32);
   state.tempValue.textContent = state.temperature;
