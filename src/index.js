@@ -37,33 +37,33 @@ const loadControls = () => {
   state.headerCityName = document.getElementById('headerCityName');
   state.resetButton = document.getElementById('resetButton');
   state.tempValue = document.getElementById('tempValue');
-  state.tempUnitToggle = document.getElementById('unitToggle')
+  state.tempUnitToggle = document.getElementById('unitToggle');
   state.temperature = 50
 }
 
 const increaseTempBtn = () => {
   state.temperature += 1;
   state.tempValue.textContent = state.temperature;
+  isCelcius()
 };
 
 const decreaseTempBtn = () => {
   state.temperature -= 1;
   state.tempValue.textContent = state.temperature;
+  isCelcius()
 };
 
-// const toggleTempUnits = () => {
-//   if (state.tempUnitToggle.checked) {
-//     const celciusTemp = Math.floor((state.temperature - 32) * 5/9)
-//     console.log(state.temperature)
-//     tempValue.textContent = celciusTemp
-//   } else {
-//     tempValue.textContent = state.temperature
-//   }
-// }
-
-const displayTemp = () => {
-  
+const isCelcius = () => {
+  if (state.tempUnitToggle.checked) {
+    state.tempValue.textContent = Math.floor((state.temperature - 32) * 5 / 9)
+    return true
+  }
+  else {
+    tempValue.textContent = state.temperature;
+    return false
+  }
 }
+
 const changeColorBasedOnTemp = () => {
   state.tempValue.classList.remove('red', 'orange', 'yellow', 'green', 'teal');
 
@@ -120,19 +120,24 @@ const changeSkyscape = () => {
 }
 
 const changeCityName = () => {
-    state.headerCityName.textContent = state.input.value;
-  };
+  state.headerCityName.textContent = state.input.value;
+};
 
 const resetCity = () => {
-    state.input.value = '';
-    state.headerCityName.textContent = 'Las Vegas';
-  };
+  state.input.value = '';
+  state.headerCityName.textContent = 'Lebanon, KS';
+};
 
+const parseRegion = (region) => {
+region = region.split(',');
+region = `${region[region.length - 2]}, ${region[region.length - 1]}`;
+return region;
+}
 
 const getLatLon = async () => {
-  const response = await axios.get('https://weather-report-proxy-msis.onrender.com/location', { params: { q: headerCityName.textContent } })
+  const response = await axios.get('https://weather-report-proxy-msis.onrender.com/location', { params: { q: state.headerCityName.textContent } })
   const { lat: latitude, lon: longitude } = response.data[0];
-  console.log(latitude, longitude)
+  state.headerCityName.textContent = `${state.headerCityName.textContent}, ${parseRegion(response.data[0].display_name)}`
   return { latitude, longitude }
 }
 
@@ -140,10 +145,11 @@ const getRealtimeWeather = async () => {
   const { latitude, longitude } = await getLatLon()
   const response = await axios.get('https://weather-report-proxy-msis.onrender.com/weather', { params: { lat: latitude, lon: longitude } })
   const currTemp = response.data.main.temp
-  state.temperature = Math.floor((currTemp - 273.15) * 9 / 5 + 32);
+  state.temperature = Math.floor((currTemp - 273.15) * 9 / 5 + 32)
   state.tempValue.textContent = state.temperature;
   changeColorBasedOnTemp()
 }
+
 const registerEvents = () => {
   state.increaseTempControl.addEventListener('click', increaseTempBtn);
   state.decreaseTempControl.addEventListener('click', decreaseTempBtn);
@@ -152,7 +158,8 @@ const registerEvents = () => {
   state.skySelect.addEventListener('change', changeSkyscape);
   state.input.addEventListener('input', changeCityName);
   state.resetButton.addEventListener('click', resetCity)
-  // state.tempUnitToggle.addEventListener('change', toggleTempUnits)
+  state.tempUnitToggle.addEventListener('change', isCelcius)
+  state.input.addEventListener('keyup', function onEvent(e) { if (e.keyCode === 13) { getRealtimeWeather() } });
 }
 
 const onLoad = () => {

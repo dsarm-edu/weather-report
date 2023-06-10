@@ -44,7 +44,9 @@ body {
 select {
     font-size: x-large;
     width: 40%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .20);
 }
+
 
 .sky__selection {
     width: 33%;
@@ -68,6 +70,15 @@ select {
     align-self: start;
     display: grid;
     margin: 0;
+}
+
+#celcius {
+    grid-area: 3 / 2 / span 1 / span 1;
+    justify-self: end;
+}
+#farenheit {
+    grid-area: 3 / 2 / span 1 / span 1;
+    justify-self: start;
 }
 
 .temperature__section .temperature__controls {
@@ -97,30 +108,32 @@ select {
     grid-area: 2 / 3 / span 1 / span 1;
     width: 3.75rem;
     height: 3rem;
-    font-weight: 700;
+    font-weight: 500;
     align-self: center;
     justify-self: center;
     text-align: center;
     padding: 0;
     cursor: pointer;
+    font-family: Rubik, sans-serif;
 }
 
 .tempUnitToggle {
     display: grid;
     grid-area: 3 / 2 / span 1 / span 1;
-    margin: 0 10px;
-    width: 3.75rem;
-    height: 2rem;
     justify-self: center;
     align-self: center;
-    visibility: hidden;
 }
 
 .slider {
+    margin: 0 10px;
+    width: 4rem;
     transition: .4s;
     border-radius: 2rem;
     cursor: pointer;
-    background-color: rgba(92, 43, 226, .8);
+    /* background-color: rgba(92, 43, 226, .4); */
+    background-color: transparent;
+    border: 3px solid rgb(92, 43, 226);
+    align-self: center;
 }
 
 .tempUnitToggle input {
@@ -135,13 +148,13 @@ select {
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
-    align-self: center;
+    cursor: pointer;
 }
 
 input:checked+.slider::before {
-    transform: translateX(1.75rem);
-}
+    transform: translateX(2rem);
 
+}
 
 .city-name__section {
     width: auto;
