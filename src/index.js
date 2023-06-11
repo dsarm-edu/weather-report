@@ -147,6 +147,7 @@ const getRealtimeWeather = async () => {
   const currTemp = response.data.main.temp
   state.temperature = Math.floor((currTemp - 273.15) * 9 / 5 + 32)
   state.tempValue.textContent = state.temperature;
+  isCelcius()
   changeColorBasedOnTemp()
 }
 
