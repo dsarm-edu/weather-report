@@ -19,7 +19,7 @@ const state = {
   tempValue: null,
   tempUnitToggle: null,
   temperature: 50
-}
+};
 
 const loadControls = () => {
   state.increaseTempControl = document.getElementById('increaseTempControl');
@@ -38,31 +38,31 @@ const loadControls = () => {
   state.resetButton = document.getElementById('resetButton');
   state.tempValue = document.getElementById('tempValue');
   state.tempUnitToggle = document.getElementById('unitToggle');
-  state.temperature = 50
-}
+  state.temperature = 50;
+};
 
 const increaseTempBtn = () => {
   state.temperature += 1;
   state.tempValue.textContent = state.temperature;
-  isCelcius()
+  isCelcius();
 };
 
 const decreaseTempBtn = () => {
   state.temperature -= 1;
   state.tempValue.textContent = state.temperature;
-  isCelcius()
+  isCelcius();
 };
 
 const isCelcius = () => {
   if (state.tempUnitToggle.checked) {
-    state.tempValue.textContent = Math.floor((state.temperature - 32) * 5 / 9)
-    return true
+    state.tempValue.textContent = Math.floor((state.temperature - 32) * 5 / 9);
+    return true;
   }
   else {
     tempValue.textContent = state.temperature;
-    return false
+    return false;
   }
-}
+};
 
 const changeColorBasedOnTemp = () => {
   state.tempValue.classList.remove('red', 'orange', 'yellow', 'green', 'teal');
@@ -79,15 +79,15 @@ const changeColorBasedOnTemp = () => {
     state.tempValue.classList.add('teal');
   }
   //TOGGLE LANDSCAPE
-  state.tree[0].classList.toggle('show', state.temperature <= 49)
-  state.garden.classList.toggle('snowy-sky', state.temperature <= 49)
+  state.tree[0].classList.toggle('show', state.temperature <= 49);
+  state.garden.classList.toggle('snowy-sky', state.temperature <= 49);
   state.ground[0].classList.toggle('snowy', state.temperature <= 49);
 
   state.tree[2].classList.toggle('show', state.temperature >= 50 && state.temperature <= 64);
   state.ground[0].classList.toggle('cloudy', state.temperature >= 50 && state.temperature <= 64);
   state.garden.classList.toggle('cloudy-sky', state.temperature >= 50 && state.temperature <= 64);
 
-  state.tree[1].classList.toggle('show', state.temperature >= 65 && state.temperature <= 75)
+  state.tree[1].classList.toggle('show', state.temperature >= 65 && state.temperature <= 75);
 
   state.tree[3].classList.toggle('show', state.temperature > 75);
   state.ground[0].classList.toggle('sunny', state.temperature > 75);
@@ -106,18 +106,18 @@ const changeSkyscape = () => {
 
   // SNOWY
   if (state.skySelect.value === 'snowy') {
-    state.sky[0].textContent = '❄️🥶❄️'
+    state.sky[0].textContent = '❄️🥶❄️';
   }
 
   // RAINY
   if (state.skySelect.value === 'rainy') {
-    state.sky[0].textContent = '💧☔️💧'
+    state.sky[0].textContent = '💧☔️💧';
   }
 
   //CLOUDY or RAINY
   state.cloud[0].classList.toggle('show', state.skySelect.value === 'cloudy' || state.skySelect.value === 'rainy');
   state.cloud[1].classList.toggle('show', state.skySelect.value === 'cloudy' || state.skySelect.value === 'rainy');
-}
+};
 
 const changeCityName = () => {
   state.headerCityName.textContent = state.input.value;
@@ -125,43 +125,68 @@ const changeCityName = () => {
 
 const resetCity = () => {
   state.input.value = '';
-  state.headerCityName.textContent = 'Lebanon, KS';
+  state.headerCityName.textContent = 'Primm';
 };
 
 const parseRegion = (region) => {
   region = region.split(',');
   region = `${region[0]}, ${region[region.length - 2]}, ${region[region.length - 1]}`;
   return region;
-}
+};
 
 const getLatLon = async () => {
-  const response = await axios.get('https://weather-report-proxy-msis.onrender.com/location', { params: { q: state.headerCityName.textContent } })
+  const response = await axios.get('https://weather-report-proxy-msis.onrender.com/location', { params: { q: state.headerCityName.textContent } });
   const { lat: latitude, lon: longitude } = response.data[0];
-  state.headerCityName.textContent = parseRegion(response.data[0].display_name)
-  return { latitude, longitude }
-}
+  state.headerCityName.textContent = parseRegion(response.data[0].display_name);
+  return { latitude, longitude };
+};
+
+const setSkyWithRealtimeWeather = (code) => {
+  code = code.toString();
+  if (code.match(/2../) || code.match(/3../) || code.match(/5../)) {
+    state.skySelect.value = 'rainy';
+  }
+  else if (code.match(/6../)) {
+    state.skySelect.value = 'snowy';
+  }
+  else if (code.match(800)) {
+    state.skySelect.value = 'sunny';
+  }
+  else {
+    state.skySelect.value = 'cloudy';
+  }
+  changeSkyscape();
+};
 
 const getRealtimeWeather = async () => {
-  const { latitude, longitude } = await getLatLon()
-  const response = await axios.get('https://weather-report-proxy-msis.onrender.com/weather', { params: { lat: latitude, lon: longitude } })
-  const currTemp = response.data.main.temp
-  state.temperature = Math.floor((currTemp - 273.15) * 9 / 5 + 32)
+  const { latitude, longitude } = await getLatLon();
+  const response = await axios.get('https://weather-report-proxy-msis.onrender.com/weather', { params: { lat: latitude, lon: longitude } });
+  const currTemp = response.data.main.temp;
+  const currSky = response.data.weather[0].id;
+  return { currTemp, currSky };
+};
+
+const updateWithRealtimeWeather = async () => {
+  const { currTemp, currSky } = await getRealtimeWeather();
+  state.temperature = Math.floor((currTemp - 273.15) * 9 / 5 + 32);
   state.tempValue.textContent = state.temperature;
-  isCelcius()
-  changeColorBasedOnTemp()
-}
+  isCelcius();
+  setSkyWithRealtimeWeather(currSky);
+  changeColorBasedOnTemp();
+};
 
 const registerEvents = () => {
   state.increaseTempControl.addEventListener('click', increaseTempBtn);
   state.decreaseTempControl.addEventListener('click', decreaseTempBtn);
-  state.increaseTempControl.addEventListener('click', changeColorBasedOnTemp); state.decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
-  state.currentTempButton.addEventListener('click', getRealtimeWeather)
+  state.increaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+  state.decreaseTempControl.addEventListener('click', changeColorBasedOnTemp);
+  state.currentTempButton.addEventListener('click', updateWithRealtimeWeather);
   state.skySelect.addEventListener('change', changeSkyscape);
   state.input.addEventListener('input', changeCityName);
-  state.resetButton.addEventListener('click', resetCity)
-  state.tempUnitToggle.addEventListener('change', isCelcius)
-  state.input.addEventListener('keyup', function onEvent(e) { if (e.keyCode === 13) { getRealtimeWeather() } });
-}
+  state.resetButton.addEventListener('click', resetCity);
+  state.tempUnitToggle.addEventListener('change', isCelcius);
+  state.input.addEventListener('keyup', function onEvent(e) { if (e.keyCode === 13) { updateWithRealtimeWeather(); } });
+};
 
 const onLoad = () => {
   loadControls();
