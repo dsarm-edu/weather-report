@@ -129,15 +129,15 @@ const resetCity = () => {
 };
 
 const parseRegion = (region) => {
-region = region.split(',');
-region = `${region[region.length - 2]}, ${region[region.length - 1]}`;
-return region;
+  region = region.split(',');
+  region = `${region[0]}, ${region[region.length - 2]}, ${region[region.length - 1]}`;
+  return region;
 }
 
 const getLatLon = async () => {
   const response = await axios.get('https://weather-report-proxy-msis.onrender.com/location', { params: { q: state.headerCityName.textContent } })
   const { lat: latitude, lon: longitude } = response.data[0];
-  state.headerCityName.textContent = `${state.headerCityName.textContent}, ${parseRegion(response.data[0].display_name)}`
+  state.headerCityName.textContent = parseRegion(response.data[0].display_name)
   return { latitude, longitude }
 }
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap');
 
 :root {
     --green-1: rgb(68, 173, 117);
@@ -33,7 +33,7 @@ body {
     width: 90%;
     min-height: 17vh;
     background: linear-gradient(rgb(47, 47, 137) 25%, lightblue);
-    color: white;
+    color: whitesmoke;
     border-radius: 40px;
     border: 4px solid transparent;
     border-top: 2px;
@@ -52,6 +52,8 @@ select {
     width: 33%;
     margin-top: 2.5rem;
     text-align: center;
+    text-shadow: rgb(12, 12, 12) 1px 0 10px;
+
 }
 
 .temperature__section {
@@ -70,26 +72,54 @@ select {
     align-self: start;
     display: grid;
     margin: 0;
+    text-shadow: rgb(12, 12, 12) 1px 0 10px;
 }
 
 #celcius {
     grid-area: 3 / 2 / span 1 / span 1;
     justify-self: end;
+    color: whitesmoke;
 }
+
 #farenheit {
     grid-area: 3 / 2 / span 1 / span 1;
     justify-self: start;
+    color: whitesmoke;
 }
 
 .temperature__section .temperature__controls {
     display: grid;
     grid-area: 1 / 1 / span 3 / span 1;
-    font-size: 3.25rem;
-    font-weight: bolder;
     color: rgb(199, 233, 149);
-    justify-content: space-between;
+    justify-self: center;
     align-self: center;
+}
+
+#increaseTempControl {
     cursor: pointer;
+    color: rgb(199, 233, 149);
+    background: transparent;
+    border: 0;
+    font-weight: 800;
+    box-sizing: border-box;
+    line-height: 50%;
+    font-size: 3.25rem;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#decreaseTempControl {
+    cursor: pointer;
+    color: rgb(199, 233, 149);
+    background: transparent;
+    border: 0;
+    font-weight: 800;
+    box-sizing: border-box;
+    line-height: 50%;
+    font-size: 3.25rem;
+    padding: 10px;
+    margin-top: 10px;
+    text-anchor: start;
 }
 
 #tempValue {
@@ -106,15 +136,18 @@ select {
 
 #currentTempButton {
     grid-area: 2 / 3 / span 1 / span 1;
-    width: 3.75rem;
+    width: 4.75rem;
     height: 3rem;
-    font-weight: 500;
+    font-weight: 600;
     align-self: center;
     justify-self: center;
     text-align: center;
     padding: 0;
     cursor: pointer;
     font-family: Rubik, sans-serif;
+    background: rgba(23, 3, 57, 0.242);
+    color: rgb(199, 233, 149);
+    box-shadow: 0px 0px 2px 1px whitesmoke;
 }
 
 .tempUnitToggle {
@@ -130,7 +163,6 @@ select {
     transition: .4s;
     border-radius: 2rem;
     cursor: pointer;
-    /* background-color: rgba(92, 43, 226, .4); */
     background-color: transparent;
     border: 3px solid rgb(92, 43, 226);
     align-self: center;
@@ -166,6 +198,10 @@ input:checked+.slider::before {
     margin-top: 2.5rem;
 }
 
+.city-name__section h2 {
+    text-shadow: rgb(12, 12, 12) 1px 0 10px;
+}
+
 input {
     width: 60%;
     align-self: center;
@@ -173,12 +209,13 @@ input {
 }
 
 .city-name__section button {
-    border-radius: 25%;
     align-self: center;
     font-size: large;
     margin: 1rem 0 0 0;
-    border: 0;
     padding: 5px 5px;
+    background: rgba(23, 3, 57, 0.242);
+    color: rgb(199, 233, 149);
+    box-shadow: 0px 0px 2px 1px whitesmoke;
 }
 
 .garden__section {
@@ -597,12 +634,14 @@ input {
 }
 
 .flower {
-    background-color: pink;
+    background-color: transparent;
+    text-align: center;
     height: 4px;
-    width: 7px;
+    width: 4px;
     grid-area: 1 / 3 / span 1 / span 1;
     justify-self: center;
     align-self: start;
+    text-indent: 0;
 }
 
 .ground {
