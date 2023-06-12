@@ -126,6 +126,7 @@ const changeCityName = () => {
 const resetCity = () => {
   state.input.value = '';
   state.headerCityName.textContent = 'Primm';
+  getRealtimeWeather()
 };
 
 const parseRegion = (region) => {
@@ -191,6 +192,7 @@ const registerEvents = () => {
 const onLoad = () => {
   loadControls();
   registerEvents();
+  getRealtimeWeather()
 };
 
 onLoad();
